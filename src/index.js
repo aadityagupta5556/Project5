@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const app = express();
 const multer =require("multer");
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // bodyParser means translator.
 app.use(multer().any());
 
 mongoose.connect(

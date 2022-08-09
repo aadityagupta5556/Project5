@@ -1,7 +1,7 @@
 const aws= require("aws-sdk")
 
 
-aws.config.update({
+aws.config.update({                                    // configuration provided by aws.
     accessKeyId: "AKIAY3L35MCRVFM24Q7U",
     secretAccessKey: "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",
     region: "ap-south-1"
@@ -14,10 +14,10 @@ let uploadFile= async (file) =>{
     let s3 = new aws.S3({apiVersion: '2006-03-01'}); // we will be using the s3 service of aws
 
     var uploadParams= {
-        ACL: "public-read",
+        ACL: "public-read",     //Access Control List
         Bucket: "classroom-training-bucket",  //HERE
         Key: "Group-1/" + file.originalname, //HERE 
-        Body: file.buffer
+        Body: file.buffer 
     }
 
 

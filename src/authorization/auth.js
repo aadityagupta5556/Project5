@@ -9,8 +9,7 @@ const jwt =require("jsonwebtoken");
 const authentication = function(req,res,next)
 {
     try{
-    let token = req.header("Authorization","Bearer Token");
-    
+    let token = req.header("Authorization","Bearer Token")
 
     if(!token)return res.status(401).send({status:false, message:"Please enter token in bearer token"});
     let splittoken=token.split(" ")

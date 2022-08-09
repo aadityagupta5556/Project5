@@ -1,6 +1,5 @@
 const productModel = require("../models/productModel.js")
 const validation = require("../validations/validator.js")
-const mongoose = require("mongoose")
 const upload = require('../.aws/config.js')
 
 
@@ -14,7 +13,7 @@ const createProduct = async function (req, res) {
     let data = req.body;
     let files =req. files;
 
-    let{title, description,  price,  currencyId,  currencyFormat,  isFreeShipping, style, availableSizes,  installments,  } = data
+    let{title, description,  price,  currencyId,  currencyFormat,  isFreeShipping, style, availableSizes,  installments} = data
 
     if (!validation.isValidBody(data)) {
         return res.status(400).send({ status: false, msg: "Please provide data in request body" })
@@ -103,6 +102,7 @@ catch (err) {
 
 
 
+
 //====================================  Getting Products By Filters  ========================================//
 
 const getProducts = async function (req, res) {
@@ -160,7 +160,7 @@ const getProductById = async function (req,res){
         let productId = req.params.productId
       if (!validation.idMatch(productId)) return res.status(400).send({ status: false, message: "ProductId is not valid" });
 
-      let getAll = await productModel.findOne({_id : productId, isDeleted : false}).sort("price")
+      let getAll = await productModel.findOne({_id : productId, isDeleted : false})
       if(!getAll) return res.status(404).send({status : false, msg : "No product found with this ProductId!"})
 
       return res.status(200).send({status : true, message : "Success", data : getAll})
@@ -186,7 +186,7 @@ const updateProduct = async function (req, res) {
         let productId = req.params.productId
         let updateBody = req.body
 
-        let { title, description, price, isFreeShipping, productImage,style, availableSizes, installments } = updateBody
+        let { title, description, price, isFreeShipping, style, availableSizes, installments } = updateBody
 
         if (!validation.idMatch) {
             return res.status(400).send({status: false, message: 'Please provide valid product id in Params' })
